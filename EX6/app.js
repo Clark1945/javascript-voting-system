@@ -16,16 +16,17 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));//提供傳送陣列型態資料
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({extended:true}));//提供傳送陣列型態資料
-app.use('/vote',voteRouter);
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/member',memberRouter);//設定路徑參數
 app.use('/public',express.static('public'));//使Express得以存取CSS,JS等靜態檔案。
+app.use('/vote',voteRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

@@ -1,3 +1,4 @@
+getVote();
 function newVote(data){
     var content=document.createElement('tr');
     content.className='row100 body';
@@ -24,7 +25,7 @@ function newVote(data){
     content.insertAdjacentHTML('beforeend',addHtml);//將變數字串轉換為HTML元素插入於content
     $('#vote').append(content);//將content加入vote元素區域
 }
-function getUrlVal(){
+function getUrlVal(val){
     var query=window.location.search.substring(1);//取得瀏覽器視窗上網只列的搜尋字串，substring是去掉第一格字元就是?
     var vars=query.split('&');//分割字串
     for(var i=0;i<vars.length;i++){
@@ -34,4 +35,24 @@ function getUrlVal(){
         }
     }
     return (false);
+}
+
+function getVote(){
+    var search='';
+    if(getUrlVal("account")){
+        search += 'account='+getUrlVal('account')+'&';
+
+    }
+    if(getUrlVal("title")){
+        search += 'title='+getUrlVal('title')+'&';
+    }
+    $.get('/vote/getVote?'+search,function(data,status){
+        for(var i =0;i<data.length;i++){
+            newVote(data[i]);
+        }
+    });
+}
+
+function search(){
+    location.href='/public/vote.html?title='+$('#title').val();
 }
