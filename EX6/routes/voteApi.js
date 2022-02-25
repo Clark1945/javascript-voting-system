@@ -62,6 +62,46 @@ router.get('/getVoteById', function(req,res){
         }
     });
 });
-
-
+router.post('/pushVote', function (req, res) {
+    
+    voteModel.findById(req.body._id, function (err, data) {
+        for (var i = 0; i < data.option.length; i++) {
+            if (data.option[i].account.indexOf(
+                req.body.account) > -1) {
+                data.option[i].account.splice(data.option[i].account.indexOf(req.body.account), 1);
+            }
+        }
+        data.option[parseInt(req.body.cnt)].account.push(req.body.account);
+        data.markModified('option');
+        data.save(function (err) {
+            if (err) {
+                res.json({ "status": 1, "msg": "error" });
+            }
+            else {
+                res.json({ "status": 0, "msg": "success" });
+            }
+        });
+    }
+    );
+});
+router.post('/cancel', function (req, res) {
+    voteModel.findById(req.body._id, function (err, data) {
+        for (var i = 0; i < data.option.length; i++) {
+            if (data.option[i].account.indexOf(
+                req.body.account) > -1) {
+                data.option[i].account.splice(data.option[i].account.indexOf(req.body.account), 1);
+            }
+        }
+        data.markModified('option');
+        data.save(function (err) {
+            if (err) {
+                res.json({ "status": 1, "msg": "error" });
+            }
+            else {
+                res.json({ "status": 0, "msg": "success" });
+            }
+        });
+    }
+    );
+});
 module.exports=router;
