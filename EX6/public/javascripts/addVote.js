@@ -5,7 +5,7 @@ if(!$.cookie('userID') || $.cookie('userID')=="null"){
 var optionAry=[];
 function pushOption() {
     if ($('#option').val() != '') {
-        optionAry.push($('#option').val());
+        optionAry.push($('#option').val());  //前端的optionAry
         var optionLabel = `<li style="margin:10px">
                                 ${optionAry[optionAry.length - 1]}   
                                 <input type="button" class="del" value="刪除" />

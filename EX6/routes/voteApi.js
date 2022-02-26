@@ -6,7 +6,7 @@ var voteModel = require('../models/voteModel.js');
 //新增投票功能
 router.post('/addVote', function (req, res) {
     var optionAry = [];
-    for (var i = 0; i < req.body.optionAry.length; i++) {
+    for (var i = 0; i < req.body.optionAry.length; i++) {  //前端的optionAry在js中
         var option = { name: req.body.optionAry[i], account: [] }
         optionAry.push(option);
     }
