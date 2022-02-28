@@ -68,10 +68,10 @@ router.post('/pushVote', function (req, res) {
         for (var i = 0; i < data.option.length; i++) {
             if (data.option[i].account.indexOf(
                 req.body.account) > -1) {
-                data.option[i].account.splice(data.option[i].account.indexOf(req.body.account), 1);
+                data.option[i].account.splice(data.option[i].account.indexOf(req.body.account), 1);//以投過，則取消投票
             }
         }
-        data.option[parseInt(req.body.cnt)].account.push(req.body.account);
+        data.option[parseInt(req.body.cnt)].account.push(req.body.account);//投票
         data.markModified('option');
         data.save(function (err) {
             if (err) {

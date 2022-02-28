@@ -37,7 +37,7 @@ function getUrlVal(val){
     return (false);
 }
 
-function getVote(){
+function getVote(){    //將完整的搜尋URL利用NewVote加入網頁
     var search='';
     if(getUrlVal("account")){
         search += 'account='+getUrlVal('account')+'&';

@@ -30,7 +30,7 @@ function initVoteDetail(data) {
     //投票總數累計
     var vote_total = 0;
     data.option.forEach(function (res) {
-        vote_total += res.account.length;
+        vote_total += res.account.length;  //將所有投票帳號陣列加總
     });
     var cnt = 0;
     //投票選項
@@ -103,7 +103,7 @@ function cancel() {
         'account': $.cookie('userID')
     }, function (res) {
         if (res.status == 0) {
-            history.go(0);
+            history.go(0);//刷新葉面
         }
     });
 }
